@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Soro de Manutenção Basal</title>
+    <link rel="stylesheet" href="smb.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Soro de Manutenção Basal</h1>
+        <form id="soroForm">
+            <label for="peso">Peso da criança (kg):</label>
+            <input type="number" id="peso" name="peso" required min="0" step="0.1">
+
+            <label for="sodio">Oferta de Sódio (mEq/L): <span class="info-icon" onclick="mostrarObservacaoSodio()">❗</span></label>
+            <input type="number" id="sodio" name="sodio" required min="0" step="0.1">
+            <div id="observacaoSodio" class="observacao" style="display:none;">
+                A oferta de Sódio em um soro de manutenção de Holliday-Segar é de 30 mEq/L (hipotônico), enquanto soros isotônicos possuem oferta de 136 mEq/L.
+            </div>
+
+            <label for="potassio">Oferta de Potássio (mEq/100kcal/dia): <span class="info-icon" onclick="mostrarObservacaoPotassio()">❗</span></label>
+            <input type="number" id="potassio" name="potassio" required min="0" step="0.1">
+            <div id="observacaoPotassio" class="observacao" style="display:none;">
+                A necessidade média de Potássio é de 2-3 mEq/100kcal/dia, sendo habitual considerar 2,5 mEq/100Kcal/dia.
+            </div>
+
+            <button type="button" onclick="calcularSoro()">Calcular</button>
+        </form>
+
+        <div id="resultado">
+            <h2>Resultado</h2>
+            <p id="prescricao"></p>
+            <p id="infusao"></p>
+        </div>
+    </div>
+
+    <script src="smb.js"></script>
+</body>
+</html>

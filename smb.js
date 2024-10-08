@@ -42,7 +42,7 @@ function calcularSoro() {
     const volumeNaCl = Math.round(ofertaTotalSodio / 3.4); // em ml, arredondado para número inteiro
 
     // 6. Cálculo do volume de KCl 19,1%
-    const volumeKCl = (potassio * pesoCalorico) / 2.5; // em ml
+    const volumeKCl = (potassio * pesoCalorico) / 2.6; // em ml
 
     // 7. Cálculo do volume total (sem arredondar o volume de KCl)
     const volumeTotal = volumeSG + volumeNaCl + volumeKCl; // O volume de KCl não é arredondado

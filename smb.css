@@ -27,13 +27,13 @@ label {
 }
 
 input[type="number"] {
-    width: calc(100% - 22px); /* Ajusta a largura do input */
+    width: calc(100% - 22px);
     padding: 10px;
     margin-top: 5px;
     margin-bottom: 15px;
     border-radius: 4px;
     border: 1px solid #ccc;
-    margin-right: 10px; /* Espaçamento entre o input e a margem direita */
+    margin-right: 10px;
 }
 
 .info-icon {
@@ -62,7 +62,7 @@ button:hover {
     margin-top: 20px;
 }
 
-#prescricao, #infusao {
+#prescricao, #infusao, #ohFinal {
     background-color: #f9f9f9;
     padding: 10px;
     border-radius: 4px;
@@ -78,5 +78,15 @@ button:hover {
     border: 1px solid #ced4da;
     font-size: 0.9em;
     color: #495057;
-    text-align: justify; /* Justifica o texto dentro da observação */
+    text-align: justify;
+}
+
+.disclaimer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.disclaimer p {
+    font-size: 0.9em;
+    color: #555;
 }

@@ -14,49 +14,64 @@ Use com cautela e não baseie condutas exclusivamente nos resultados do site.
 
 
 Abaixo segue a explicação de como as contas são realizadas pelo site.
-Como as contas são feitas:
 
-1. Cálculo do Peso Calórico (kg calórico):
+A) Como os cálculos são feitos:
+
+1. Cálculo do Peso Calórico:
    
-O peso calórico é calculado com base no peso total da criança, de acordo com as seguintes regras:
+- Para crianças com até 10 kg: 1 kg = 1 "kg calórico" (100 kcal).
+- Para crianças entre 10 a 20 kg: os primeiros 10 kg contam como 10 kg calóricos, e o peso adicional acima de 10 kg é multiplicado por 0,5.
+- Para crianças com mais de 20 kg: os primeiros 20 kg contam como 15 kg calóricos, e o peso adicional acima de 20 kg é multiplicado por 0,2.
 
-- Para crianças com peso de 0 a 10 kg:
-   * Peso calórico = Peso total (kg)
--  Para crianças com peso de 10 a 20 kg:
-   * Peso calórico = 10 + (Peso total - 10) / 2
-- Para crianças com peso acima de 20 kg:
-   * Peso calórico = 15 + (Peso total - 20) / 5
-     
-2. Cálculo da Oferta Hídrica (OH):
-   
-A oferta hídrica (OH) é calculada multiplicando o peso calórico por 100:
+2. Cálculo da Oferta Hídrica (OH) Total:
 
-- OH = Peso calórico × 100
-  
-3. Cálculo da Oferta de Sódio:
-   
-A oferta total de sódio é calculada pela fórmula:
+- OH total = Peso calórico x OH em ml/100 kcal.
 
-- Oferta total de Sódio (mEq) = (Oferta em mEq/L × Volume de SG 5% (ml)) / 1000
-  
+Obs: O valor padrão para OH é 100 ml/100 kcal, mas pode ser ajustado conforme a necessidade do paciente.
+
+3. Cálculo do Volume de SG 5%:
+
+O volume de SG 5% será igual à oferta hídrica total.
+
+4. Cálculo da Oferta de Sódio:
+
+- Oferta total de sódio (mEq) = Oferta de sódio em mEq/L (input) x Volume de SG 5% (OH) em ml / 1000.
+
 5. Cálculo do Volume de NaCl 20%:
-   
-O volume de NaCl 20% necessário é calculado da seguinte forma:
 
-- Volume de NaCl 20% (ml) = Oferta total de Sódio (mEq) / 3.4
+- Volume de NaCl 20% (ml) = Oferta total de sódio (mEq) / 3,4.
   
-6. Cálculo da Oferta de Potássio:
-   
-A quantidade de potássio é calculada com base no input fornecido em mEq/100 kcal/dia. A fórmula para o volume de KCl 19,1% é:
+Obs: Arredondado para números inteiros.
 
-- Volume de KCl 19,1% (ml) = (Oferta de Potássio (mEq/100 kcal) × Peso Calórico) / 2.6
+6. Cálculo do Volume de KCl 19,1%:
+
+- Volume de KCl (ml) = (Oferta de potássio em mEq/100kcal/dia x Peso calórico) / 2,5.
+
+Obs: Arredondado para uma casa decimal.
+
+7. Cálculo do Volume Total e Taxa de Infusão:
+
+- Volume total = Soma dos volumes de SG 5%, NaCl 20%, e KCl 19,1%.
+- Taxa de infusão (ml/h) = Volume total / 24 horas.
+
+Obs: Taxa de infusão arredondado para uma casa decimal.
+
+8. Cálculo da Oferta Hídrica Final (OH Final):
+
+- OH final (ml/100 kcal) = Volume total / Peso calórico.
   
-7. Cálculo do Volume Total e da Taxa de Infusão:
+B) Informações Importantes:
+
+1. Os campos de OH, Sódio, e Potássio já vêm preenchidos com valores padrões, mas podem ser editados conforme necessário:
    
-O volume total a ser infundido em 24 horas é:
-
-- Volume total = Volume SG + Volume NaCl + Volume KCl
+- OH = 100 ml/100 kcal.
+- Sódio = 136 mEq/L.
+- Potássio = 2,5 mEq/100 kcal/dia.
   
-A taxa de infusão (em ml/h) é calculada como:
+2. Observações das caixas:
+   
+- Oferta de Sódio: "A oferta de sódio em um soro de manutenção de Holliday-Segar é de 30 mEq/L (hipotônico), enquanto soros isotônicos possuem oferta de 136 mEq/L."
+- Oferta de Potássio: "A necessidade média de potássio é de 2-3 mEq/100 kcal/dia, sendo habitual considerar 2,5 mEq/100 kcal/dia."
+- Oferta Hídrica (OH): "A oferta hídrica padrão é de 100 ml/100 kcal, entretanto, pode ser alterada de acordo com o paciente e seu balanço hídrico."
 
-- Taxa de infusão = Volume total / 24
+Não nos responsabilizamos por condutas tomadas a partir desses cálculos.

@@ -1,3 +1,8 @@
+function mostrarObservacaoOH() {
+    const observacao = document.getElementById('observacaoOH');
+    observacao.style.display = observacao.style.display === 'none' ? 'block' : 'none';
+}
+
 function mostrarObservacaoSodio() {
     const observacao = document.getElementById('observacaoSodio');
     observacao.style.display = observacao.style.display === 'none' ? 'block' : 'none';
@@ -12,8 +17,9 @@ function calcularSoro() {
     const peso = parseFloat(document.getElementById('peso').value);
     const sodio = parseFloat(document.getElementById('sodio').value);
     const potassio = parseFloat(document.getElementById('potassio').value);
+    const oh = parseFloat(document.getElementById('oh').value);
 
-    if (!peso || !sodio || !potassio) {
+    if (!peso || !sodio || !potassio || !oh) {
         alert('Preencha todos os campos corretamente.');
         return;
     }
@@ -29,8 +35,8 @@ function calcularSoro() {
         pesoCalorico = 15 + (peso - 20) * 0.2; // 15 + 0,2 kg calórico para cada kg adicional
     }
 
-    // 2. Cálculo da oferta hídrica (OH)
-    const ofertaHidrica = pesoCalorico * 100; // OH = peso calórico x 100
+    // 2. Cálculo da oferta hídrica (OH) total
+    const ofertaHidrica = pesoCalorico * oh; // OH total = peso calórico x OH (ml/100kcal)
 
     // 3. A oferta hídrica será dada em SG 5%
     const volumeSG = ofertaHidrica;
@@ -39,18 +45,23 @@ function calcularSoro() {
     const ofertaTotalSodio = (sodio * volumeSG) / 1000; // em mEq
 
     // 5. Cálculo do volume de NaCl 20%
-    const volumeNaCl = Math.round(ofertaTotalSodio / 3.4); // em ml, arredondado para número inteiro
+    const volumeNaCl = Math.round(ofertaTotalSodio / 3.4); // Arredondar para número inteiro
 
     // 6. Cálculo do volume de KCl 19,1%
-    const volumeKCl = (potassio * pesoCalorico) / 2.6; // em ml
+    const volumeKCl = (potassio * pesoCalorico) / 2.5; // Volume de KCl, arredondando para uma casa decimal
+    const volumeKClArredondado = volumeKCl.toFixed(1); // Arredondado para uma casa decimal
 
-    // 7. Cálculo do volume total (sem arredondar o volume de KCl)
-    const volumeTotal = volumeSG + volumeNaCl + volumeKCl; // O volume de KCl não é arredondado
+    // 7. Cálculo do volume total
+    const volumeTotal = volumeSG + volumeNaCl + volumeKCl; // Soma dos volumes
 
-    // 8. Cálculo da taxa de infusão
-    const taxaInfusao = (volumeTotal / 24).toFixed(1); // em mL/h, arredondado para 1 casa decimal
+    // 8. Cálculo da taxa de infusão (arredondado para uma casa decimal)
+    const taxaInfusao = (volumeTotal / 24).toFixed(1); // mL/h, arredondado para 1 casa decimal
 
-    // Exibir resultados
-    document.getElementById('prescricao').innerText = `Prescrição: SG 5% ${Math.round(volumeSG)} mL + NaCl 20% ${volumeNaCl} mL + KCl 19,1% ${volumeKCl.toFixed(1)} mL`;
-    document.getElementById('infusao').innerText = `Infundir IV em bomba de infusão contínua à ${taxaInfusao} mL/h em 24h.`;
+    // 9. Cálculo da oferta hídrica final (OH final)
+    const ohFinal = (volumeTotal / pesoCalorico).toFixed(1); // OH final em ml/100 kcal
+
+    // 10. Exibir o resultado
+    document.getElementById('prescricao').innerText = `Prescrição: SG 5% ${volumeSG.toFixed(0)} ml + NaCl 20% ${volumeNaCl} ml + KCl 19,1% ${volumeKClArredondado} ml.`;
+    document.getElementById('infusao').innerText = `Infundir a ${taxaInfusao} ml/h em 24h.`;
+    document.getElementById('ohFinal').innerText = `OH final: ${ohFinal} ml/100 kcal.`;
 }
